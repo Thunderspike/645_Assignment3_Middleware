@@ -15,4 +15,4 @@ COPY --from=build /root/surveyMiddleware/target/SurveyMiddleware.war /usr/local/
 
 # debugging 
 RUN apt-get update;
-RUN apt-get install curl
+RUN apt-get -y install curl;
