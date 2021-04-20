@@ -2,6 +2,8 @@ FROM maven:3.8.1-openjdk-11-slim as build
 
 LABEL "maintainers"="Pol Ajazi; Flavio Amurrio Moya"
 
+RUN apk --no-cache add curl # adding curl for debugging
+
 WORKDIR /root/surveyMiddleware
 
 COPY . .
