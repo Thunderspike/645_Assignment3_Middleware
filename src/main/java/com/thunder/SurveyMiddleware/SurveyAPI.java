@@ -69,6 +69,7 @@ public class SurveyAPI {
 				return Response.ok(survey).build();
 			return Response.status(404).entity(getErrObj("Survey with id: " + id + " not found")).build();
 		} catch ( Exception e) {
+			em.clear();
 			System.out.println((new Gson()).toJson(e));
 			return Response.status(500).entity(getErrObj(generic500message)).build();
 		}

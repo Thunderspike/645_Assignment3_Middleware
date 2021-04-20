@@ -27,3 +27,14 @@ jobs:
                   context: .
                   push: true
                   tags: thunderspike/645_assignment3_middleware:latest
+
+            - name: Github Action for curl
+              uses: wei/curl@v1.1.1
+              with:
+                  args: >
+                      -k
+                      -u "${{ secrets.RANCHER_TOKEN }}"
+                      -X POST
+                      -H 'Accept: application/json'
+                      -H 'Content-Type: application/json'
+                      https://ec2-34-238-190-146.compute-1.amazonaws.com/v3/project/c-v88j4:p-qt2gf/workloads/statefulset:default:middleware?action=redeploy
