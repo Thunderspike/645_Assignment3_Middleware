@@ -14,3 +14,7 @@ RUN mvn compile war:war
 FROM tomcat:10.0.5-jdk15-openjdk-slim-buster
 
 COPY --from=build /root/surveyMiddleware/target/SurveyMiddleware.war /usr/local/tomcat/webapps/
+
+# debugging 
+RUN apt-get update;
+RUN apt-get install curl
