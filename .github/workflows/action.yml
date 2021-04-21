@@ -37,4 +37,4 @@ jobs:
                       -X POST
                       -H 'Accept: application/json'
                       -H 'Content-Type: application/json'
-                      https://ec2-34-238-190-146.compute-1.amazonaws.com/v3/project/c-v88j4:p-qt2gf/workloads/statefulset:default:middleware?action=redeploy
+                      https://100.27.49.189/v3/project/c-6ckq8:p-t6d55/workloads/statefulset:hw3namespace:middleware?action=redeploy

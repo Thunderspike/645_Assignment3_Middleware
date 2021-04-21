@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -26,9 +27,16 @@ import jakarta.ws.rs.core.Response;
 
 @Path("api")
 public class SurveyAPI {
-	private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("surveys");
+	private static Map<String, String> env = System.getenv();
+	private static Map<String, Object> configOverrides = new HashMap<String, Object>(){{
+		put("javax.persistence.jdbc.url", env.get("DB_URL"));
+		put("javax.persistence.jdbc.user", env.get("DB_USER"));
+		put("javax.persistence.jdbc.password", env.get("DB_PASSWORD"));
+	}};
+	
+	private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("surveys", configOverrides);
 	private static EntityManager em = factory.createEntityManager();
-
+	
 	private static String generic500message = "Something went wrong with our servers, try again shortly";
 
 	@POST
@@ -52,6 +60,7 @@ public class SurveyAPI {
 			List<Survey> surveys = query.list();
 			return Response.ok(surveys).build();
 		} catch (Exception e) {
+			em.clear();
 			System.out.println((new Gson()).toJson(e));
 			return Response.status(500).entity(getErrObj(e.getMessage())).build();
 		}
