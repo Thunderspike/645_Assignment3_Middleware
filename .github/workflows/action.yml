@@ -3,7 +3,7 @@ name: Dockerhub Deploy
 on: push
 
 jobs:
-    build:
+    build-push-middleware-image:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
@@ -27,8 +27,8 @@ jobs:
                   context: .
                   push: true
                   tags: thunderspike/645_assignment3_middleware:latest
-    curl:
-        needs: build
+    redeploy-rancher-middleware-workload:
+        needs: build-push-middleware-image
         runs-on: ubuntu-latest
         steps:
             - name: Github Action for curl
