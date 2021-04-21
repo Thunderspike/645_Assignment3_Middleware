@@ -1,4 +1,4 @@
-name: Dockerhub Deploy
+name: middleware
 
 on: push
 
