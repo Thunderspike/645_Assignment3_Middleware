@@ -3,7 +3,7 @@ name: Dockerhub Deploy
 on: push
 
 jobs:
-    curl:
+    build:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
@@ -27,7 +27,10 @@ jobs:
                   context: .
                   push: true
                   tags: thunderspike/645_assignment3_middleware:latest
-
+    curl:
+        needs: build
+        runs-on: ubuntu-latest
+        steps:
             - name: Github Action for curl
               uses: wei/curl@v1.1.1
               with:
